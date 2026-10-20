@@ -33,6 +33,12 @@ export default function TodoApp() {
     setTodos(todos.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo)))
   }
 
+  function clearAll() {
+    if (!window.confirm('すべての TODO を削除しますか？')) return
+    setTodos([])
+  }
+
+
   function deleteTodo(id) {
     setTodos(todos.filter((todo) => todo.id !== id))
   }
@@ -58,6 +64,10 @@ export default function TodoApp() {
           全 {todos.length} 件 / 完了 {doneCount} 件 / 残り {remaining} 件
         </p>
       )}
+      <button onClick={clearAll} disabled={todos.length === 0}>
+        すべて削除
+      </button>
+
       <button onClick={clearDone} disabled={doneCount === 0}>
         完了済みを削除
       </button>
